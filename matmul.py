@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-#we are multiplying matrices (yay!)
-import numpy as np
-
-def matmul(A, B):
-    
-=======
 import numpy as np
 
 def print_matrix(M):
@@ -33,4 +26,3 @@ def main():
     print_matrix(prod)
 
 main()
->>>>>>> 3ebaea52fb45f4ad4c4444054764ad49847eb881
