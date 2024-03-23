@@ -11,7 +11,7 @@ def matmul(A, B):
         for j in range(n):
             # row of B column
             for k in range(n):
-                result[i][j] += A[i][k] * B[k][j]
+                result[i, j] += A[i, k] * B[k, j]
     return result
 
 def strassen(M1, M2, n0):
@@ -37,7 +37,7 @@ def strassen(M1, M2, n0):
             P6 = strassen(B-D, G+H, n0)
             P7 = strassen(C-A, E+F, n0)
 
-            ret = np.zeros((n, n))
+            ret = np.matrix(np.zeros((n, n)))
             ret[:n/2, :n/2] = P4 + P5 + P6 - P2
             ret[:n/2, n/2:] = P1 + P2
             ret[n/2:, :n/2] = P3 + P4
@@ -49,13 +49,12 @@ def strassen(M1, M2, n0):
             #inefficient padding
             padm1 = np.pad(M1, ((0, 1), (0,1)), mode = 'constant', constant_values = 0)
             padm2 = np.pad(M2, ((0, 1), (0,1)), mode = 'constant', constant_values = 0)
-            strassen(padm1, padm2, n0)
+            return strassen(padm1, padm2, n0)[:n+1, :n+1]
 
     else: 
-        matmul(M1, M2)
+        return matmul(M1, M2)
 
 test1 = np.matrix([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]])
-test2 = np.matrix([[1, 0, 1, 0], [1, 0, 1, 0],[1, 0, 1, 0],[1, 0, 1, 0]])
-
+test2 = np.matrix([[1, 0, 1, 0], [1, 0, 1, 0], [1, 0, 1, 0], [1, 0, 1, 0]])
 
 print(strassen(test1, test2, 3))
