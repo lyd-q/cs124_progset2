@@ -16,13 +16,13 @@ def matmul(A, B):
         for j in range(n):
             # row of B column
             for k in range(n):
-                result[i][j] += A[i][k] * B[k][j]
+                result[i,j] += A[i,k] * B[k,j]
     return result
 
-def main():
-    A = np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]])
-    B = np.array([[1, 0, 1, 0], [1, 0, 1, 0],[1, 0, 1, 0],[1, 0, 1, 0]])
-    prod = matmul(A, B)
-    print_matrix(prod)
+# def main():
+#     A = np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]])
+#     B = np.array([[1, 0, 1, 0], [1, 0, 1, 0],[1, 0, 1, 0],[1, 0, 1, 0]])
+#     prod = matmul(A, B)
+#     print_matrix(prod)
 
-main()
+# main()

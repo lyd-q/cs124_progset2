@@ -17,7 +17,7 @@ def matmul(A, B):
 def strassen(M1, M2, n0):
     n = M1.shape[0]
     # if n is larger than the crossover point, we use strassen
-    if n > n0:
+    if n >= n0:
          #if n is even, we don't need to pad 
         if n%2 == 0: 
             A = M1[:n/2, :n/2]
