@@ -6,33 +6,33 @@ import matmul
 
 naivelist = []
 strassenlist = []
-for n in range(10, 20):
+for n in range(3, 20):
     #generate a matrix of size n:
     matrix1 = np.matrix(np.zeros((n,n)))
     matrix2 = np.matrix(np.zeros((n,n)))
-    for x in range(n):
-        for y in range(n):
-            matrix1[x,y] =  np.random.choice([0,1])
-            matrix2[x,y] =  np.random.choice([0,1])
-    if n%2 == 0: #if n is even
-        ticstras = time.time()
-        strassen.strassen(matrix1, matrix2, n/2)
-        tocstras = time.time()
-        #strassenlist.append(tocstras - ticstras)
-        print(n, "strassen:", tocstras - ticstras)
-    else: 
+    sums = 0
+    sumn = 0
+    for i in range(3): #taking averages
+        for x in range(n):
+            for y in range(n):
+                matrix1[x,y] =  np.random.choice([0,1])
+                matrix2[x,y] =  np.random.choice([0,1])
         ticstras = time.time()
         strassen.strassen(matrix1, matrix2, n-1)
         tocstras = time.time()
         #strassenlist.append(tocstras - ticstras)
-        print(n, "strassen:", tocstras - ticstras)
+        sums += tocstras - ticstras
+    avgs = sums/3
+    print(n, "strassen:", avgs)
 
-    
-    ticnaive = time.time()
-    matmul.matmul(matrix1, matrix2)
-    tocnaive = time.time()
+    for i in range(3):
+        ticnaive = time.time()
+        matmul.matmul(matrix1, matrix2)
+        tocnaive = time.time()
+        sumn += tocnaive - ticnaive
     #naivelist.append(tocnaive - ticnaive)
-    print(n, "naive:", tocnaive - ticnaive)
+    avgn = sumn/3
+    print(n, "naive:", avgn)
 
 # print(naivelist)
 # print(strassenlist)
