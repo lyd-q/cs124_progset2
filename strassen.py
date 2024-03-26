@@ -49,8 +49,13 @@ def strassen(M1, M2, n0):
             #inefficient padding
             padm1 = np.pad(M1, ((0, 1), (0,1)), mode = 'constant', constant_values = 0)
             padm2 = np.pad(M2, ((0, 1), (0,1)), mode = 'constant', constant_values = 0)
-            return strassen(padm1, padm2, n0)[:n+1, :n+1]
+            return strassen(padm1, padm2, n0)[:n, :n]
 
     else: 
         return matmul(M1, M2)
 
+test1 = np.matrix([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]])
+test2 = np.matrix([[1, 0, 1, 0], [1, 0, 1, 0], [1, 0, 1, 0], [1, 0, 1, 0]])
+
+print(strassen(test1, test2, 3))
+print(test1[:3, :3])
