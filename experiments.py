@@ -2,11 +2,13 @@ import time
 import numpy as np
 import strassen
 import matmul
+import matplotlib.pyplot as plt
 
 
 naivelist = []
 strassenlist = []
-for n in range(3, 20):
+nvals = list(range(3, 60))
+for n in nvals:
     #generate a matrix of size n:
     matrix1 = np.matrix(np.zeros((n,n)))
     matrix2 = np.matrix(np.zeros((n,n)))
@@ -24,6 +26,7 @@ for n in range(3, 20):
         sums += tocstras - ticstras
     avgs = sums/3
     print(n, "strassen:", avgs)
+    strassenlist.append(avgs)
 
     for i in range(3):
         ticnaive = time.time()
@@ -33,13 +36,24 @@ for n in range(3, 20):
     #naivelist.append(tocnaive - ticnaive)
     avgn = sumn/3
     print(n, "naive:", avgn)
+    naivelist.append(avgn)
 
 # print(naivelist)
 # print(strassenlist)
 
 #graph stuff now! 
 
+plt.plot(nvals, strassenlist, label = "strassen")
+plt.plot(nvals, naivelist, label = "naive")
 
+#label it 
+plt.xlabel('n')
+plt.ylabel('runtime')
+plt.title('naive vs. strassen')
+plt.legend()  # Adding legend
+
+
+plt.show()
 
 # #generate a list of random matrices
 # # each dimension generate 10 matrices -> 500, 1000, 1500 
