@@ -7,6 +7,23 @@
 # take in n and crossover value, check if n is less than crossover value
 # if n is less than crossover value, run matmul
 import numpy as np
+import sys
+
+d = int(sys.argv[2])
+input_file = sys.argv[3]
+
+A = np.matrix(np.zeros((d, d)))
+B = np.matrix(np.zeros((d, d)))
+with open(input_file, "r") as file:
+    for i in range(d):
+        for j in range(d):
+            line = file.readline()
+            A[i, j] = int(line)
+    for i in range(d):
+        for j in range(d):
+            line = file.readline()
+            B[i, j] = int(line)
+        
 
 def matmul(A, B):
     n = A[0].size
@@ -99,3 +116,4 @@ def strassen(M1, M2, n0):
 # print(test1[:3, :3])
 
 
+strassen(A, B, 10)
