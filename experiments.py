@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 naivelist = []
 strassenlist = []
-nvals = list(range(3, 60))
+nvals = list(range(4, 10))
 for n in nvals:
     #generate a matrix of size n:
     matrix1 = np.matrix(np.zeros((n,n)))
