@@ -44,60 +44,60 @@ def strassen(M1, M2, n0):
         if n%2 == 0: 
 
             ret = np.matrix(np.zeros((n, n)))
-
+            half = int(n/2)
             #P1 
-            X1 = M1[:n/2, :n/2]
-            X2 = M2[:n/2, n/2:] - M2[n/2:, n/2:]
+            X1 = M1[:half, :half]
+            X2 = M2[:half, half:] - M2[half:, half:]
             P = strassen(X1, X2, n0)
             
-            ret[:n/2, n/2:] += P
-            ret[n/2:, n/2:] += P
+            ret[:half, half:] += P
+            ret[half:, half:] += P
 
             #P2 
-            X1 = M1[:n/2, :n/2] + M1[:n/2, n/2:]
-            X2 = M2[n/2:, n/2:]
+            X1 = M1[:half, :half] + M1[:half, half:]
+            X2 = M2[half:, half:]
             P = strassen(X1, X2, n0) 
 
-            ret[:n/2, :n/2] -= P
-            ret[:n/2, n/2:] += P 
+            ret[:half, :half] -= P
+            ret[:half, half:] += P 
 
             #P3 
-            X1 = M1[n/2:, :n/2] + M1[n/2:, n/2:]
-            X2 = M2[:n/2, :n/2]
+            X1 = M1[half:, :half] + M1[half:, half:]
+            X2 = M2[:half, :half]
             P = strassen(X1, X2, n0)
 
-            ret[n/2:, :n/2] += P
-            ret[n/2:, n/2:] -= P
+            ret[half:, :half] += P
+            ret[half:, half:] -= P
 
             #P4 
-            X1 = M1[n/2:, n/2:]
-            X2 = M2[n/2:, :n/2] - M2[:n/2, :n/2]
+            X1 = M1[half:, half:]
+            X2 = M2[half:, :half] - M2[:half, :half]
             P = strassen(X1, X2, n0)
 
-            ret[:n/2, :n/2] += P
-            ret[n/2:, :n/2] += P
+            ret[:half, :half] += P
+            ret[half:, :half] += P
 
             #P5 
-            X1 = M1[:n/2, :n/2] + M1[n/2:, n/2:]
-            X2 = M2[:n/2, :n/2] + M2[n/2:, n/2:] 
+            X1 = M1[:half, :half] + M1[half:, half:]
+            X2 = M2[:half, :half] + M2[half:, half:] 
             P = strassen(X1, X2, n0)
 
-            ret[:n/2, :n/2] += P
-            ret[n/2:, n/2:] += P
+            ret[:half, :half] += P
+            ret[half:, half:] += P
 
             #P6 
-            X1 = M1[:n/2, n/2:] - M1[n/2:, n/2:]
-            X2 = M2[n/2:, :n/2] + M2[n/2:, n/2:]
+            X1 = M1[:half, half:] - M1[half:, half:]
+            X2 = M2[half:, :half] + M2[half:, half:]
             P = strassen(X1, X2, n0)
 
-            ret[:n/2, :n/2] += P
+            ret[:half, :half] += P
 
             #P7 
-            X1 = M1[n/2:, :n/2] - M1[:n/2, :n/2]
-            X2 = M2[:n/2, :n/2] + M2[:n/2, n/2:]
+            X1 = M1[half:, :half] - M1[:half, :half]
+            X2 = M2[:half, :half] + M2[:half, half:]
             P = strassen(X1, X2, n0)
 
-            ret[n/2:, n/2:] += P
+            ret[half:, half:] += P
 
             return(ret)
         #if n is odd, we need to pad, and then recursively call again
@@ -116,4 +116,6 @@ def strassen(M1, M2, n0):
 # print(test1[:3, :3])
 
 
-strassen(A, B, 10)
+answer = strassen(A, B, 10)
+for i in range(d):
+    print(int(answer[i, i]))
